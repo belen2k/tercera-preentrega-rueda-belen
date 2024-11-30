@@ -1,0 +1,41 @@
+{% extends "Appbelen/index.html" %}
+{% load static %}
+{% block contenidoQueCambia %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Buscar Universidades  {% endblock %}
+</head>
+<body>
+    <h1>Buscar Universidades</h1>
+
+    <!-- Formulario para realizar búsquedas -->
+    <form method="GET" action="{% url 'buscar_estudiantes' %}">
+        <label for="q">Nombre de la universidad:</label>
+        <input type="text" id="q" name="q" value="{{ query }}" placeholder="Ingrese el nombre del estudiante">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+
+    <hr>
+
+    <!-- Mostrar resultados de la búsqueda -->
+    <h2>Resultados</h2>
+    {% if estudiante %}
+        <ul>
+            <!-- Iterar sobre las universidades encontradas y mostrar su nombre y país -->
+            {% for estudiante in estudiantes %}
+                <li>
+                    <strong>{{ estudiante.nombre }}</strong> - {{ estudiante.apellido}}- {{ estudiante.mail}}-{{ estudiante.Nota}}
+                    
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No se encontraron universidades para la consulta '{{ query }}'.</p>
+    {% endif %}
+</body>
+</html>
+{% endblock %}
